@@ -10,7 +10,7 @@ void initBoard()
 	{
 		for (int y = 0; y < BOARD_HEIGHT; y++)
 		{
-			if ( x > BOARD_WIDTH || y > BOARD_HEIGHT)
+			if (x > BOARD_WIDTH || y > BOARD_HEIGHT)
 			{
 				board[x][y] = POS_FREE;
 			}
@@ -18,7 +18,7 @@ void initBoard()
 	}
 }
 
-void defineBoard()
+void drawBoard()
 {
 	for (int i = 0; i < BOARD_WIDTH; i++)
 	{
@@ -26,23 +26,32 @@ void defineBoard()
 		{
 			switch (board[i][j])
 			{
-			case 0:
+			case 1:
+				drawRect(i, j, POS_SELECTED);
+				break;
+			case 2:
+				drawRect(i, j, POS_RED);
+				break;
+			case 3:
+				drawRect(i, j, POS_YELLOW);
+				break;
+			case 4:
+				drawRect(i, j, POS_GREEN);
+				break;
+			case 5:
+				drawRect(i, j, POS_TURQUOISE);
+				break;
+			case 6:
+				drawRect(i, j, POS_PURPLE);
+				break;
+			case 7:
+				drawRect(i, j, POS_BLUE);
+				break;
+			default:
 				drawRect(i, j, POS_FREE);
 				break;
-			case 1:
-				drawRect(i, j, POS_)
-			default:
-				break;
-			}
 
-			/*if (board[i][j] == POS_TAKEN)
-			{
-				drawRect(i, j, POS_TAKEN);
 			}
-			else if (board[i][j] == BORDER) //Same thing as above, expect loading borderTexture instead of the block texture
-			{
-				drawRect(i, j, BORDER);
-			}*/
 		}
 	}
 }

@@ -4,10 +4,49 @@
 #include "board.h"
 #include "graphics.h"
 
+SDL_Window* gWindow;
+SDL_Renderer* gRenderer;
+SDL_Texture* tTurquoise;
+SDL_Texture* tBlue;
+SDL_Texture* tFree;
+SDL_Texture* tGreen;
+SDL_Texture* tPurple;
+SDL_Texture* tRed;
+SDL_Texture* tSelected;
+SDL_Texture* tYellow;
+
 void drawRect(int x, int y, int pieceType)
 {
 	SDL_Rect a = { x * MAGNIFICATION, y * MAGNIFICATION, MAGNIFICATION/*size*/, MAGNIFICATION/*size*/ };
 	//TODO make a case which looks through the current board and decides which texture to draw based on the passed in pieceType variable use board.h
+	switch (pieceType)
+	{
+	default:
+		SDL_RenderCopy(gRenderer, tFree, NULL, &a);
+		break;
+	case 1:
+		SDL_RenderCopy(gRenderer, tSelected, NULL, &a);
+		break;
+	case 2:
+		SDL_RenderCopy(gRenderer, tRed, NULL, &a);
+		break;
+	case 3:
+		SDL_RenderCopy(gRenderer, tYellow, NULL, &a);
+		break;
+	case 4:
+		SDL_RenderCopy(gRenderer, tGreen, NULL, &a);
+		break;
+	case 5:
+		SDL_RenderCopy(gRenderer, tTurquoise, NULL, &a);
+		break;
+	case 6:
+		SDL_RenderCopy(gRenderer, tPurple, NULL, &a);
+		break;
+	case 7:
+		SDL_RenderCopy(gRenderer, tBlue, NULL, &a);
+		break;
+	}
+
 }
 
 bool init()
@@ -86,9 +125,35 @@ bool loadMedia()
 
 	/*if (blockTexture == NULL || borderTexture == NULL || pieceTexture == NULL)
 	{
-		std::cout << "Failed to load texture image!" << std::endl;
-		success = false;
+	std::cout << "Failed to load texture image!" << std::endl;
+	success = false;
 	}*/
 
 	return success;
+}
+SDL_Texture* loadTexture(std::string path)
+{
+	//The final texture
+	SDL_Texture* newTexture = NULL;
+
+	//Load image at specified path
+	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
+	if (loadedSurface == NULL)
+	{
+		std::cout << "Unable to load image" << path.c_str() << "! SDL_image Error: " << IMG_GetError() << std::endl;
+	}
+	else
+	{
+		//Create texture from surface pixels
+		newTexture = SDL_CreateTextureFromSurface(gRenderer, loadedSurface);
+		if (newTexture == NULL)
+		{
+			std::cout << "Unable to create texture from " << path.c_str() << "! SDL Error: " << SDL_GetError() << std::endl;
+		}
+
+		//Get rid of old loaded surface
+		SDL_FreeSurface(loadedSurface);
+	}
+
+	return newTexture;
 }
