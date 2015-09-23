@@ -10,6 +10,15 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="board.cpp" />
+    <ClCompile Include="graphics.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="board.h" />
+    <ClInclude Include="graphics.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{710E027A-C910-4C72-872D-067B8E2DD87C}</ProjectGuid>
     <RootNamespace>Nexus</RootNamespace>
@@ -68,9 +77,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="source.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
