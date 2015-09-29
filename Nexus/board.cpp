@@ -2,7 +2,7 @@
 #include "graphics.h"
 
 int board[BOARD_WIDTH][BOARD_HEIGHT];
-
+int count = 0;
 //This method creates a 2X2 array that is used to define where blocks are drawn
 void initBoard()
 {
@@ -54,4 +54,11 @@ void drawBoard()
 			}
 		}
 	}
+}
+
+void fillRandomPlaces()//TODO: Make this smarter lol
+{
+	
+	board[count][count] = POS_BLUE;
+	count++;
 }

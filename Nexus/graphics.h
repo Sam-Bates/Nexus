@@ -13,6 +13,8 @@ void drawRect(int, int, int);
 
 const int MAGNIFICATION = 32;
 
+extern SDL_Window* gWindow;
+extern SDL_Renderer* gRenderer;
 SDL_Texture* loadTexture(std::string path);
 
 
