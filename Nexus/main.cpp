@@ -7,6 +7,7 @@ int main(int argc, char* args[])
 {
 
 	initBoard();
+	initVector();
 	bool gameOver = false;
 	//Start up SDL and create window
 	if (!init())

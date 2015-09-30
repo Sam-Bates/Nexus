@@ -1,5 +1,6 @@
 #ifndef board_h_
 #define board_h_
+#include <vector>
 
 const int BOARD_WIDTH = 20; //in blocks
 const int BOARD_HEIGHT = 20; //in blocks
@@ -18,6 +19,8 @@ extern int board[BOARD_WIDTH][BOARD_HEIGHT];
 void drawBoard();
 void initBoard();
 void fillRandomPlaces();
+void initVector();
+extern std::vector<int> freePlacesVec;
 
 
 #endif
