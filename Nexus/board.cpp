@@ -1,7 +1,6 @@
 #include "board.h"
 #include "graphics.h"
 #include <random>
-#include <time.h>
 #include <iostream>
 
 int board[BOARD_WIDTH][BOARD_HEIGHT];
@@ -59,46 +58,4 @@ void drawBoard()
 			}
 		}
 	}
-}
-void initVector()
-{
-	//for (std::vector<int>::iterator it = freePlacesVec.begin(); it != freePlacesVec.end(); ++it)
-	//{
-	//	freePlacesVec[*it] = *it;
-	//}
-	for (int i = 0; i < freePlacesVec.size(); i++)
-	{
-		freePlacesVec[i] = i;
-	}
-}
-void fillRandomPlaces()
-{
-	//srand(time(NULL));
-	/*4 = number of random blocks to be spawned change this later. also check if there are actually 4 blocks available*/
-	for (int i = 0; i < 4 ; i++)
-	{
-		int pieceType = 2 + rand() % (7 - 2); // This generates a random number between 2 - 7
-		int randomFreeIndex = rand() % freePlacesVec.size();
-		int freeIndexData = freePlacesVec[randomFreeIndex];
-		int x = freeIndexData % BOARD_WIDTH;
-		int y = freeIndexData / BOARD_WIDTH;
-		board[x][y] = pieceType;
-		removeFreeVecSpot(randomFreeIndex);
-	}
-}
-
-/* assuming width and height are the same
-Index % width = X
-Index / width = Y
-(width * Y) + X = Index
-
-to remove specific spot, find the indexOf(n) vector.erase(index)
-to add new taken spot pop_back(n)
-*/
-void removeFreeVecSpot(int indexToBeRemoved)
-{
-	//CHECK IF THERE ARE ACTUALLY 4 BLOCKS THAT EXIST
-	freePlacesVec.erase(freePlacesVec.begin() + indexToBeRemoved);
-
-	
 }

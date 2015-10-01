@@ -48,7 +48,6 @@ int main(int argc, char* args[])
 						{
 						case SDLK_SPACE:
 							fillRandomPlaces();
-							//removeFreeVecSpot(1, 1);
 							break;
 						}
 					}

@@ -12,7 +12,7 @@ const int POS_GREEN = 4;
 const int POS_TURQUOISE = 5;
 const int POS_PURPLE = 6;
 const int POS_BLUE = 7;
-
+const int NUMBER_OF_RANDOM_BLOCKS = 4;
 
 extern int board[BOARD_WIDTH][BOARD_HEIGHT];
 
@@ -21,6 +21,7 @@ void initBoard();
 void fillRandomPlaces();
 void initVector();
 void removeFreeVecSpot(int);
+int numberOfFreeBlocks();
 extern std::vector<int> freePlacesVec;
 
 

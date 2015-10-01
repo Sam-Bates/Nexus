@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="board.cpp" />
     <ClCompile Include="graphics.cpp" />
+    <ClCompile Include="gridVector.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
