@@ -2,8 +2,8 @@
 #define board_h_
 #include <vector>
 
-const int BOARD_WIDTH = 20; //in blocks
-const int BOARD_HEIGHT = 20; //in blocks
+const int BOARD_WIDTH = 10; //in blocks
+const int BOARD_HEIGHT = 10; //in blocks
 const int POS_FREE = 0;
 const int POS_SELECTED = 1;
 const int POS_RED = 2;
@@ -20,6 +20,7 @@ void drawBoard();
 void initBoard();
 void fillRandomPlaces();
 void initVector();
+void removeFreeVecSpot(int);
 extern std::vector<int> freePlacesVec;
 
 
