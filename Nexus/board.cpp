@@ -25,35 +25,35 @@ void initBoard()
 
 void drawBoard()
 {
-	for (int i = 0; i < BOARD_WIDTH; i++)
+	for (int x = 0; x < BOARD_WIDTH; x++)
 	{
-		for (int j = 0; j < BOARD_HEIGHT; j++)
+		for (int y = 0; y < BOARD_HEIGHT; y++)
 		{
-			switch (board[i][j])
+			switch (board[x][y])
 			{
 			case 1:
-				drawRect(i, j, POS_SELECTED);
+				drawRect(x, y, POS_SELECTED);
 				break;
 			case 2:
-				drawRect(i, j, POS_RED);
+				drawRect(x, y, POS_RED);
 				break;
 			case 3:
-				drawRect(i, j, POS_YELLOW);
+				drawRect(x, y, POS_YELLOW);
 				break;
 			case 4:
-				drawRect(i, j, POS_GREEN);
+				drawRect(x, y, POS_GREEN);
 				break;
 			case 5:
-				drawRect(i, j, POS_TURQUOISE);
+				drawRect(x, y, POS_TURQUOISE);
 				break;
 			case 6:
-				drawRect(i, j, POS_PURPLE);
+				drawRect(x, y, POS_PURPLE);
 				break;
 			case 7:
-				drawRect(i, j, POS_BLUE);
+				drawRect(x, y, POS_BLUE);
 				break;
 			default:
-				drawRect(i, j, POS_FREE);
+				drawRect(x, y, POS_FREE);
 				break;
 
 			}

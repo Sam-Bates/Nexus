@@ -52,5 +52,11 @@ void removeFreeVecSpot(int x, int y)
 }
 void addBall(int x, int y)
 {
+	//remove vector position
 
+		removeFreeVecSpot(x, y);
+
+	
+	//add to board
+	board[x][y] = POS_RED;
 }

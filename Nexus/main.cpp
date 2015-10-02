@@ -56,7 +56,7 @@ int main(int argc, char* args[])
 						int x, y;
 						SDL_GetMouseState(&x, &y);
 						std::cout << "Current Mouse pos: "<< "x: " << x << "y: " << y << std::endl;
-
+						addBall(x / MAGNIFICATION, y / MAGNIFICATION);
 					}
 				}
 				delLines();
