@@ -2,6 +2,7 @@
 #include <iostream>
 #include "graphics.h"
 #include "board.h"
+#include "gridVector.h"
 
 int main(int argc, char* args[])
 {
@@ -43,7 +44,6 @@ int main(int argc, char* args[])
 					else if (e.type == SDL_KEYDOWN)
 					{
 						//keyboard input
-
 						switch (e.key.keysym.sym)
 						{
 						case SDLK_SPACE:
@@ -51,7 +51,15 @@ int main(int argc, char* args[])
 							break;
 						}
 					}
+					else if (e.type == SDL_MOUSEBUTTONDOWN)
+					{
+						int x, y;
+						SDL_GetMouseState(&x, &y);
+						std::cout << "Current Mouse pos: "<< "x: " << x << "y: " << y << std::endl;
+
+					}
 				}
+				delLines();
 				drawBoard();
 				SDL_RenderPresent(gRenderer);
 

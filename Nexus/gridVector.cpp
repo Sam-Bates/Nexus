@@ -1,3 +1,4 @@
+#include "gridVector.h"
 #include "board.h"
 #include <time.h>
 
@@ -32,7 +33,7 @@ int numberOfFreeBlocks()
 {
 	return freePlacesVec.size();
 }
-
+ 
 /* assuming width and height are the same
 Index % width = X
 Index / width = Y
@@ -44,4 +45,12 @@ to add new taken spot pop_back(n)
 void removeFreeVecSpot(int indexToBeRemoved)
 {
 	freePlacesVec.erase(freePlacesVec.begin() + indexToBeRemoved);
+}
+void removeFreeVecSpot(int x, int y)
+{
+	freePlacesVec.erase(freePlacesVec.begin() + ((BOARD_WIDTH * y) + x));
+}
+void addBall(int x, int y)
+{
+
 }

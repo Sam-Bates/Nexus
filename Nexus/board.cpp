@@ -1,4 +1,5 @@
 #include "board.h"
+#include "gridVector.h"
 #include "graphics.h"
 #include <random>
 #include <iostream>
@@ -55,6 +56,45 @@ void drawBoard()
 				drawRect(i, j, POS_FREE);
 				break;
 
+			}
+		}
+	}
+}
+void delLines()
+{
+	int count = 0;
+	int pieceType = 0;
+	for (int x = 0; x < BOARD_WIDTH; x++)
+	{
+		for (int y = 0; y < BOARD_HEIGHT; y++)
+		{
+			int previousPieceType = pieceType;
+			pieceType = board[x][y];
+			if (pieceType == previousPieceType && count != 0)
+			{
+				count++;
+			}
+			if (count > LINE_NUMBER)
+			{
+				removeFreeVecSpot(x, y);
+				count = 0;
+			}
+		}
+	}
+	for (int y = 0; y < BOARD_HEIGHT; y++)
+	{
+		for (int x = 0; x < BOARD_WIDTH; x++)
+		{
+			int previousPieceType = pieceType;
+			pieceType = board[x][y];
+			if (pieceType == previousPieceType && count != 0)
+			{
+				count++;
+			}
+			if (count > LINE_NUMBER)
+			{
+				removeFreeVecSpot(x, y);
+				count = 0;
 			}
 		}
 	}

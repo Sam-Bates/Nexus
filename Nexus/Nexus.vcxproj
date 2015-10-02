@@ -19,6 +19,7 @@
   <ItemGroup>
     <ClInclude Include="board.h" />
     <ClInclude Include="graphics.h" />
+    <ClInclude Include="gridVector.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{710E027A-C910-4C72-872D-067B8E2DD87C}</ProjectGuid>
