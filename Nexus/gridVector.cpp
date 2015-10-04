@@ -1,6 +1,7 @@
 #include "gridVector.h"
 #include "board.h"
 #include <time.h>
+#include <iostream>
 
 void initVector()
 {
@@ -44,19 +45,40 @@ to add new taken spot pop_back(n)
 */
 void removeFreeVecSpot(int indexToBeRemoved)
 {
-	freePlacesVec.erase(freePlacesVec.begin() + indexToBeRemoved);
+	std::cout << "freePlacesVec: " << freePlacesVec.size() << std::endl;
+	std::cout << "removeFreeVecSpot: " << "indexToBeRemoved: " << indexToBeRemoved << std::endl;
+ 	freePlacesVec.erase(freePlacesVec.begin() + indexToBeRemoved);
+	std::cout << "freePlacesVec: " << freePlacesVec.size() << std::endl;
 }
 void removeFreeVecSpot(int x, int y)
 {
+	std::cout << "freePlacesVec: " << freePlacesVec.size() << std::endl;
 	freePlacesVec.erase(freePlacesVec.begin() + ((BOARD_WIDTH * y) + x));
+	std::cout << "removeFreeVecSpot: " << "x: " << x << "y: " << y << std::endl;
+	std::cout << "freePlacesVec: " << freePlacesVec.size() << std::endl;
 }
-void addBall(int x, int y)
+//void addBall(int x, int y)
+//{
+//	std::cout << "addBall: " << "x: " << x << "y: " << y << std::endl;
+//	//remove vector position
+//	removeFreeVecSpot(x, y);
+//	//add to board
+//	board[x][y] = POS_RED;
+//}
+void addNewBall(int x, int y)
 {
-	//remove vector position
-
-		removeFreeVecSpot(x, y);
-
-	
-	//add to board
-	board[x][y] = POS_RED;
+	//try to find index that has the given X Y
+	int boardCell = (BOARD_WIDTH * y) + x;
+	for (int i = 0; i < freePlacesVec.size(); i++)
+	{
+		if (freePlacesVec[i] == boardCell)
+		{
+			removeFreeVecSpot(i);
+			board[x][y] = POS_RED;
+		}
+	}
+}
+void removeBall(int x, int y)
+{
+	freePlacesVec.push_back((BOARD_WIDTH * y) + x);
 }

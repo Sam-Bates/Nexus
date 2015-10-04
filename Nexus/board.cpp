@@ -62,40 +62,52 @@ void drawBoard()
 }
 void delLines()
 {
+	//save board[x][y]
+	//check if any pieces around it match the saved board[x][y]
+	//if a string of two are found check if board[x+1,2,3,4,5][y] all equals the same piecetype
+	//delete them if they do
 	int count = 0;
 	int pieceType = 0;
 	for (int x = 0; x < BOARD_WIDTH; x++)
 	{
 		for (int y = 0; y < BOARD_HEIGHT; y++)
 		{
-			int previousPieceType = pieceType;
 			pieceType = board[x][y];
-			if (pieceType == previousPieceType && count != 0)
+			if (board[x][y + 1] == pieceType)
 			{
-				count++;
-			}
-			if (count > LINE_NUMBER)
-			{
-				removeFreeVecSpot(x, y);
-				count = 0;
+				if (board[x][y] == pieceType
+					&& board[x][y + 1] == pieceType 
+					&& board[x][y + 2] == pieceType
+					&& board[x][y + 3] == pieceType
+					&& board[x][y + 4] == pieceType
+					&& board[x][y + 5])
+				{
+					//add new free spots to the vector
+					//remove balls from board
+					for (int i = 0; i < LINE_NUMBER; i++)
+					{
+						board[x][y + i] == POS_FREE;
+						removeBall(x, y + i);
+					}
+				}
 			}
 		}
 	}
-	for (int y = 0; y < BOARD_HEIGHT; y++)
+	/*for (int y = 0; y < BOARD_HEIGHT; y++)
 	{
-		for (int x = 0; x < BOARD_WIDTH; x++)
-		{
-			int previousPieceType = pieceType;
-			pieceType = board[x][y];
-			if (pieceType == previousPieceType && count != 0)
-			{
-				count++;
-			}
-			if (count > LINE_NUMBER)
-			{
-				removeFreeVecSpot(x, y);
-				count = 0;
-			}
-		}
+	for (int x = 0; x < BOARD_WIDTH; x++)
+	{
+	int previousPieceType = pieceType;
+	pieceType = board[x][y];
+	if (pieceType == previousPieceType && count != 0)
+	{
+	count++;
 	}
+	if (count > LINE_NUMBER)
+	{
+	removeFreeVecSpot(x, y);
+	count = 0;
+	}
+	}
+	}*/
 }

@@ -40,7 +40,7 @@ void drawRect(int x, int y, int pieceType)
 		SDL_RenderCopy(gRenderer, tTurquoise, NULL, &a);
 		break;
 	case 6:
-		SDL_RenderCopy(gRenderer, tPurple, NULL, &a);
+ 		SDL_RenderCopy(gRenderer, tPurple, NULL, &a);
 		break;
 	case 7:
 		SDL_RenderCopy(gRenderer, tBlue, NULL, &a);

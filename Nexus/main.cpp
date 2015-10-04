@@ -10,6 +10,7 @@ int main(int argc, char* args[])
 	initBoard();
 	initVector();
 	bool gameOver = false;
+	bool justClicked = false;
 	//Start up SDL and create window
 	if (!init())
 	{
@@ -56,13 +57,20 @@ int main(int argc, char* args[])
 						int x, y;
 						SDL_GetMouseState(&x, &y);
 						std::cout << "Current Mouse pos: "<< "x: " << x << "y: " << y << std::endl;
-						addBall(x / MAGNIFICATION, y / MAGNIFICATION);
+						addNewBall(x / MAGNIFICATION, y / MAGNIFICATION);
+						justClicked = true;
 					}
 				}
-				delLines();
+
+				
 				drawBoard();
 				SDL_RenderPresent(gRenderer);
 
+				if (justClicked)
+				{
+					delLines();
+					justClicked = false;
+				}
 
 				//Clear screen
 				SDL_RenderClear(gRenderer);
