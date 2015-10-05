@@ -68,7 +68,7 @@ int main(int argc, char* args[])
 
 				if (justClicked)
 				{
-					delLines();
+					//delLines();
 					justClicked = false;
 				}
 
