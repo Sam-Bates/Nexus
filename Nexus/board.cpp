@@ -93,16 +93,20 @@ void delLines()
 	{
 		for (int x = 0; x < BOARD_WIDTH; x++)
 		{
-			int previousPieceType = pieceType;
 			pieceType = board[x][y];
-			if (pieceType == previousPieceType && count != 0)
+			if (board[x + 1][y] == pieceType
+				&& board[x + 2][y] == pieceType
+				&& board[x + 3][y] == pieceType
+				&& board[x + 4][y] == pieceType
+				&& board[x][y] != POS_FREE)
 			{
-				count++;
-			}
-			if (count > LINE_NUMBER)
-			{
-				removeFreeVecSpot(x, y);
-				count = 0;
+				//add new free spots to the vector
+				//remove balls from board
+				for (int i = 0; i < LINE_NUMBER; i++)
+				{
+					board[x + i][y] = POS_FREE;
+					removeBall(x + i, y);
+				}
 			}
 		}
 	}
