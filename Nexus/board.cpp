@@ -18,6 +18,7 @@ void initBoard()
 			if (x > BOARD_WIDTH || y > BOARD_HEIGHT)
 			{
 				board[x][y] = POS_FREE;
+				changeBall(x, y, POS_FREE);
 			}
 		}
 	}
@@ -83,8 +84,8 @@ void delLines()
 				//remove balls from board
 				for (int i = 0; i < LINE_NUMBER; i++)
 				{
-					board[x][y + i] = POS_FREE;
-					removeBall(x, y + i);
+					//board[x][y + i] = POS_FREE;
+					changeBall(x, y + i, POS_FREE);
 				}
 			}
 		}
@@ -104,8 +105,8 @@ void delLines()
 				//remove balls from board
 				for (int i = 0; i < LINE_NUMBER; i++)
 				{
-					board[x + i][y] = POS_FREE;
-					removeBall(x + i, y);
+					//board[x + i][y] = POS_FREE;
+					changeBall(x + i, y, POS_FREE);
 				}
 			}
 		}
