@@ -112,3 +112,8 @@ void delLines()
 		}
 	}
 }
+void addSelected(int x, int y)
+{
+	int a = ((BOARD_WIDTH * y) + x);
+	
+}

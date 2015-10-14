@@ -3,6 +3,7 @@
 
 void drawBoard();
 void initBoard();
+void addSelected(int, int);
 
 const int BOARD_WIDTH = 10; //in blocks
 const int BOARD_HEIGHT = 10; //in blocks
