@@ -15,6 +15,7 @@
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="gridVector.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="pathFinding.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="board.h" />

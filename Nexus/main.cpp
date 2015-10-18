@@ -4,12 +4,14 @@
 #include "board.h"
 #include "gridVector.h"
 #include <vector>
-
+#include <queue>
+bool checkForPath(int, int, int, int);
 int main(int argc, char* args[])
 {
 
 	initBoard();
 	initVector();
+	
 	bool gameOver = false;
 	bool justClicked = false;
 	bool selected = false;
@@ -63,7 +65,6 @@ int main(int argc, char* args[])
 						SDL_GetMouseState(&x, &y);
 						x = x / MAGNIFICATION;
 						y = y / MAGNIFICATION;
-						std::cout << "Current Mouse Pos: "<< "x: " << x << "y: " << y << std::endl;
 						//If nothing has been selected AND the user clicked on a TAKEN space
 						if (selected == false && board[x][y] != POS_FREE)
 						{
@@ -82,7 +83,7 @@ int main(int argc, char* args[])
 						else if (selected == true && board[x][y] != POS_FREE)
 						{
 							//revert colour of previously seleceted ball
-							board[x][y] = selectedPieceType;
+							board[selectedX][selectedY] = selectedPieceType;
 
 							//change current selection to new selection
 							selectedX = x;
@@ -98,69 +99,17 @@ int main(int argc, char* args[])
 						//Else if something has already been selected AND the user clicked on a FREE space
 						else if (selected == true && board[x][y] == POS_FREE)
 						{
-							//revert colour of selected ball
-							board[x][y] = selectedPieceType;
-
-							//A*
-							std::vector<int> openList;
-							std::vector<int> closedList;
-							int orignalSquare = 0; // find original square
-							int destinationSquare = ((BOARD_WIDTH * y) + x);
-							openList.push_back((BOARD_WIDTH * y) + x); //add original square
-							do{
-								int currentSquareIndex = getLowestFscore();//search for lowest Fscore
-								closedList.push_back((BOARD_WIDTH * y) + x);
-								openList.erase(openList.begin() + getCurrentSquareIndex());
-
-								if (searchForIndex(destinationSquare))
-								{
-									break;
-								}
-
-								//adjacentSquares = 
-								
-							} while (!openList.empty());
-							//[openList add : originalSquare]; // start by adding the original position to the open list
-							
-							//do {
-							//	currentSquare = [openList squareWithLowestFScore]; // Get the square with the lowest F score
-
-							//	[closedList add : currentSquare]; // add the current square to the closed list
-							//	[openList remove : currentSquare]; // remove it to the open list
-
-							//	if ([closedList contains : destinationSquare]) { // if we added the destination to the closed list, we've found a path
-							//		// PATH FOUND
-							//		break; // break the loop
-							//	}
-
-							//	adjacentSquares = [currentSquare walkableAdjacentSquares]; // Retrieve all its walkable adjacent squares
-
-							//	foreach(aSquare in adjacentSquares) {
-
-							//		if ([closedList contains : aSquare]) { // if this adjacent square is already in the closed list ignore it
-							//			continue; // Go to the next adjacent square
-							//		}
-
-							//		if (![openList contains : aSquare]) { // if its not in the open list
-
-							//			// compute its score, set the parent
-							//			[openList add : aSquare]; // and add it to the open list
-
-							//		}
-							//		else { // if its already in the open list
-
-							//			// test if using the current G score make the aSquare F score lower, if yes update the parent because it means its a better path
-
-							//		}
-							//	}
-
-							//} while (![openList isEmpty]); // Continue until there is no more available square in the open list (which means there is no path)
-
-
-							//swap contents of cells
-							changeBall(x, y, selectedPieceType);
-							changeBall(selectedX, selectedY, POS_FREE);
-
+							if (checkForPath(selectedX, selectedY, x, y))
+							{
+								//revert colour of selected ball
+								board[x][y] = selectedPieceType;
+								changeBall(x, y, selectedPieceType);
+								changeBall(selectedX, selectedY, POS_FREE);
+							}
+							else
+							{
+								board[selectedX][selectedY] = selectedPieceType;
+							}
 							selected = false;
 							justClicked = true;
 						}
@@ -184,15 +133,80 @@ int main(int argc, char* args[])
 	//close();
 	return 0;
 }
-int getLowestFscore()
+bool checkForPath(int startX, int startY, int endX, int endY)
 {
-	return 0;
-}
-int getCurrentSquareIndex()
-{
-	return 0;
-}
-bool searchForIndex(int index)
-{
-	return true;
+	std::queue<int>queue;
+	std::vector<bool>visited;
+
+	for (int i = 0; i < BOARD_WIDTH * BOARD_HEIGHT; i++)
+	{
+		visited.push_back(false);
+	}
+	int startIndex = ((BOARD_WIDTH * startX) + startY);
+	int endIndex = ((BOARD_WIDTH * endX) + endY);
+	queue.push(startIndex);
+	visited[startIndex] = true;
+	while (!queue.empty())
+	{
+
+		int current = queue.front();
+		queue.pop();
+		std::cout << "current: " << current << std::endl;
+		if (current == endIndex)
+		{
+			return true;
+		}
+		int neighbours[4] = {};
+		//north
+		if (current - BOARD_HEIGHT <= 0)
+		{
+			neighbours[0] = current;
+		}
+		else
+		{
+			neighbours[0] = current - BOARD_HEIGHT;
+		}
+		//south
+		if (current + BOARD_HEIGHT >= BOARD_HEIGHT * BOARD_WIDTH)
+		{
+			neighbours[1] = current;
+		}
+		else
+		{
+			neighbours[1] = current + BOARD_HEIGHT;
+		}
+		//east
+		if (current % 10 == BOARD_WIDTH - 1)
+		{
+			neighbours[2] = current;
+		}
+		else
+		{
+			neighbours[2] = current + 1;
+		}
+		//west
+		if (current % 10 == 0)
+		{
+			neighbours[3] = current;
+		}
+		else
+		{
+			neighbours[3] = current - 1;
+		}
+		for (int i = 0; i < 4; i++)
+		{
+			int X = neighbours[i] % BOARD_WIDTH;
+			int Y = neighbours[i] / BOARD_HEIGHT;
+			if (board[Y][X] == POS_FREE)
+			{
+				if (!visited[neighbours[i]])
+				{
+					queue.push(neighbours[i]);
+					visited[neighbours[i]] = true;
+				}
+			}
+
+		}
+	}
+	return false;
 }
