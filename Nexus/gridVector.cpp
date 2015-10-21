@@ -3,6 +3,8 @@
 #include <time.h>
 #include <iostream>
 
+std::vector<int> freePlacesVec(BOARD_HEIGHT * BOARD_WIDTH);
+
 void initVector()
 {
 	srand(time(NULL));
@@ -21,14 +23,12 @@ void fillRandomPlaces()
 	}
 	for (int i = 0; i < iterateNum; i++)
 	{
-		//########################
-		int pieceType = 2 + rand() % (7 - 2); // This generates a random number between 2 - 7
+		int pieceType = 2 + rand() % (7 - 2); /* This generates a random number between 2 - 7 because 0 && 1 are POS_FREE and POS_SELECTED*/
 		int randomFreeIndex = rand() % freePlacesVec.size();
 		int freeIndexData = freePlacesVec[randomFreeIndex];
 		int x = freeIndexData % BOARD_WIDTH;
 		int y = freeIndexData / BOARD_WIDTH;
-		board[x][y] = pieceType;
-		removeFreeVecSpot(randomFreeIndex);
+		changeBall(x, y, pieceType);
 	}
 }
  
@@ -44,6 +44,7 @@ void removeFreeVecSpot(int indexToBeRemoved)
 {
  	freePlacesVec.erase(freePlacesVec.begin() + indexToBeRemoved);
 }
+//overloaded method so that you can pass the x & y or grid index number
 void removeFreeVecSpot(int x, int y)
 {
 	freePlacesVec.erase(freePlacesVec.begin() + ((BOARD_WIDTH * y) + x));

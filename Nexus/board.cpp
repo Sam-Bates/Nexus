@@ -6,7 +6,6 @@
 
 int board[BOARD_WIDTH][BOARD_HEIGHT];
 
-std::vector<int> freePlacesVec(BOARD_HEIGHT * BOARD_WIDTH);// setting the size of the vector to be the total size of the board
 //This method creates a 2X2 array that is used to define where blocks are drawn
 void initBoard()
 {
