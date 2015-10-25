@@ -38,7 +38,7 @@ int main(int argc, char* args[])
 
 			//Event handler
 			SDL_Event e;
-
+			fillRandomPlaces();
 			//While application is running
 			while (!gameOver)
 			{
@@ -109,6 +109,7 @@ int main(int argc, char* args[])
 
 				if (justClicked)
 				{
+					fillRandomPlaces();
 					delLines();
 					justClicked = false;
 				}
